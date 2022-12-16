@@ -1,23 +1,7 @@
 package jcrud;
-
-/*
- * Importa todas as classes do Conector MySQL.
- * Download: https://dev.mysql.com/downloads/connector/j/
- * Na listagem, selecione "Platform Independent", baixe a versão ".ZIP" e 
- * descompacte-a. Copie o arquivo "mysql-connector-XXXX.jar" para uma pasta 
- * "recources" dentro da pasta do projeto.
- * Clique direito em "Bibliotecas" ? Adicionar JAR/Pasta...
- * Localize o arquivo do conector.
- */
 import java.sql.*;
 
 public class Jcrud {
-
-    /*
-     * Método para conexão com o banco de dados.
-     * Em breve, teremos uma classe somente para esse método e outros 
-     * relacionados ao MySQL.
-     */
     public static Connection mysqlConnect(
             String hostname, // URL do servidor MySQL
             String database, // Nome do banco de dados
