@@ -1,2 +1,2 @@
-# JavaCrud
- Aplicativo CRUD completo em Java e MySQL.
+# JavaCRUD
+ CRUD experimental usando Java e MySQL.
