@@ -14,5 +14,5 @@ CREATE TABLE users (
 INSERT INTO users ( u_name, u_email, u_password ) VALUES 
 ("Joca da Silva", "joca@silva.com.br", SHA1("Senha123")),
 ("Setembrino Troca Tapas", "set@brino.com", SHA1("Senha123")),
-("Hermenilda Siriliado Souza", "hermenilda@gmail.com", SHA1("Senha123")),
+("Hermenilda Siriliado Souza", "heremnilda@gmail.com", SHA1("Senha123")),
 ("Marineuza Siriliano", "mari@neuza.com.br", SHA1("Senha123"));
