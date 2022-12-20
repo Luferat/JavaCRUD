@@ -4,10 +4,13 @@ package net.luferat.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import static net.luferat.tools.Config.*;
+import net.luferat.tools.Config;
 
 public class DbConnect {
 
+    // Obtém configurações
+    static Config config = new Config();
+    
     // Método para conexão com o banco de dados.
     public static Connection DbConnect() {
         try {
@@ -18,15 +21,19 @@ public class DbConnect {
             // Faz a conexão com o banco de dados
             return DriverManager.getConnection(
                     // URL de conexão com o banco de dados
-                    "jdbc:mysql://" + HOSTNAME + ":3306/" + DATABASE,
+                    "jdbc:mysql://" + config.HOSTNAME + ":3306/" + config.DATABASE,
                     // Usuário desse banco de dados
-                    USERNAME,
+                    config.USERNAME,
                     // Senha do usuário do banco de dados
-                    PASSWORD
+                    config.PASSWORD
             );
         } catch (ClassNotFoundException | SQLException error) { // Tratamento de erros.
-            System.out.println("Oooops! Erro no banco de dados! " + error);
-            
+
+            String methodName = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+
+            System.out.println("Oooops! Erro em " + methodName + ":  " + error.getMessage());
+
             // Em caso de erro, retorna null
             return null;
         }

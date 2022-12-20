@@ -1,13 +1,24 @@
 package net.luferat.tools;
 
+import java.io.IOException;
+
 public class ClearConsole {
 
     public static void ClearConsole() {
 
-        // Escreve um monte de quebras de linha para limpar o console
-        for (int i = 0; i < 100; i++) {
-            System.out.println("\n");
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                Runtime.getRuntime().exec("clear");
+            }
+        } catch (IOException | InterruptedException error) {
+            String methodName = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            System.out.println("Oooops! Erro em " + methodName + ":  " + error.getMessage());
         }
-    }
+        
+        System.out.println("");
 
+    }
 }

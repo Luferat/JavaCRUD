@@ -7,61 +7,62 @@ import java.util.Scanner;
 import static net.luferat.database.DbConnect.DbConnect;
 import static net.luferat.jcrud.UsersList.UsersList;
 import static net.luferat.tools.ClearConsole.ClearConsole;
-import static net.luferat.tools.Config.APPNAME;
 import static net.luferat.tools.ShowMenu.userMenu;
+import static net.luferat.tools.Template.header;
 
 public class ViewUser {
 
     // Atributos da classe
     private static String sql;
     private static ResultSet res;
-    private static int userId;
 
-    public static void ViewUser(int userId) throws SQLException {
-
-        // Limpa tela
+    public static void ViewUser(int userId) {
+        
         ClearConsole();
-
-        // Mostra cabeçalho do aplicativo
-        System.out.println(APPNAME);
+        header();
 
         // Query de obtém todos os dados do usuário
         sql = "SELECT *, DATE_FORMAT(u_date, '%d/%m/%Y às %H:%i') AS datebr FROM users WHERE u_status = 'on' AND u_id = '" + (int) userId + "';";
 
-        // Executa a consulta SQL e armazena resultados em "res"
-        res = DbConnect().createStatement().executeQuery(sql);
+        try {
+            // Executa a consulta SQL e armazena resultados em "res"
+            res = DbConnect().createStatement().executeQuery(sql);
 
-        // Se obteve um registro...
-        if (res.next()) {
-            
-            // Obtém o Id do usuário
-            userId = res.getInt("u_id");
+            // Se obteve um registro...
+            if (res.next()) {
 
-            // Exibe os dados do usuário
-            System.out.println(res.getString("u_name") + "\n");
-            System.out.println("    - ID no sistema: " + userId);
-            System.out.println("    - E-mail: " + res.getString("u_email"));
-            System.out.println("    - Cadastrado em: " + res.getString("datebr"));
+                // Obtém o Id do usuário
+                userId = res.getInt("u_id");
 
-            // Fecha conexão com banco de dados
-            DbConnect().close();
+                // Exibe os dados do usuário
+                System.out.println(res.getString("u_name") + "\n");
+                System.out.println("    - ID no sistema: " + userId);
+                System.out.println("    - E-mail: " + res.getString("u_email"));
+                System.out.println("    - Cadastrado em: " + res.getString("datebr"));
 
-            // Menu de opções
-            userMenu(userId);
+                // Fecha conexão com banco de dados
+                DbConnect().close();
 
-            // Se não achou o registro
-        } else {
+                // Menu de opções
+                userMenu(userId);
 
-            // Feedback e opção de saída
-            System.out.println("Usuário não encontrado. Tente novamente!");
-            System.out.println("Tecle [Enter] para retornar: ");
-            Scanner myOption = new Scanner(System.in);
-            String option = myOption.nextLine();
+                // Se não achou o registro
+            } else {
 
-            // Volta a listar todos os usuários
-            UsersList();
+                // Feedback e opção de saída
+                System.out.println("Usuário não encontrado. Tente novamente!");
+                System.out.println("Tecle [Enter] para retornar: ");
+                Scanner myOption = new Scanner(System.in);
+                String option = myOption.nextLine();
+
+                // Volta a listar todos os usuários
+                UsersList();
+            }
+
+        } catch (SQLException error) {
+            String methodName = new Object() {
+            }.getClass().getEnclosingMethod().getName();
+            System.out.println("Oooops! Erro em " + methodName + ":  " + error.getMessage());
         }
-
     }
-
 }

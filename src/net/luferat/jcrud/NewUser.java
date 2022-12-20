@@ -1,25 +1,28 @@
 package net.luferat.jcrud;
 
 // Importa classes necessárias
-import java.sql.SQLException;
 import java.util.Scanner;
 import static net.luferat.jcrud.UsersList.UsersList;
 import static net.luferat.tools.ClearConsole.ClearConsole;
-import static net.luferat.tools.Config.APPNAME;
+import net.luferat.tools.Config;
+import static net.luferat.tools.Template.header;
 
 public class NewUser {
 
-    public static void NewUser() throws SQLException {
+    // Obtém configurações
+    static Config c = new Config();
 
-        // Limpa tela
+    public static void NewUser() {
+
         ClearConsole();
+        header();
 
         // Interface temporária
-        System.out.println(APPNAME);
         System.out.println("Cadastrando novo usuário...");
         System.out.println("Tecle [Enter] para retornar: ");
         Scanner myOption = new Scanner(System.in);
         String option = myOption.nextLine();
+
         UsersList();
     }
 

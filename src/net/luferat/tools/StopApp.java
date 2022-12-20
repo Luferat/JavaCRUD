@@ -2,9 +2,11 @@ package net.luferat.tools;
 
 // Importa classes necessárias
 import static net.luferat.tools.ClearConsole.ClearConsole;
-import static net.luferat.tools.Config.SEPARATOR;
 
 public class StopApp {
+    
+    // Obtém configurações
+    static Config c = new Config();
 
     public static void StopApp() {
 
@@ -12,7 +14,7 @@ public class StopApp {
         ClearConsole();
 
         // Mensagem de encerramento
-        System.out.println(SEPARATOR + "\nObrigado!\n\n\n\n");
+        System.out.println(c.SEPARATOR + "\nObrigado!\n\n\n\n");
 
         // Encerra aplicativo
         System.exit(0);
